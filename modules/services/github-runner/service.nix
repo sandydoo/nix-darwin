@@ -139,12 +139,12 @@ in
             echo "Configuring GitHub Actions Runner"
 
             # Always clean the working directory
-            ${getExe pkgs.findutils} ${escapeShellArg workDir} -mindepth 1 -delete
+            ${getExe pkgs.findutils} ${escapeShellArg workDir} -mindepth 1 -delete || true
 
             # Clean the $RUNNER_ROOT if we are in ephemeral mode
             if ${boolToString cfg.ephemeral}; then
               echo "Cleaning $RUNNER_ROOT"
-              ${getExe pkgs.findutils} "$RUNNER_ROOT" -mindepth 1 -delete
+              ${getExe pkgs.findutils} "$RUNNER_ROOT" -mindepth 1 -delete || true
             fi
 
             # If the `.runner` file does not exist, we assume the runner is not configured
